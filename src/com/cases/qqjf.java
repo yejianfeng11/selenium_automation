@@ -28,8 +28,6 @@ public class qqjf {
 	WebElement msg_24g = null;
 	Select sle = null;
 
-	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
 	@BeforeTest
 	public void setUp() {
 		// 打开谷歌浏览器
@@ -47,10 +45,6 @@ public class qqjf {
 		prefs.put("profile.password_manager_enabled", false);
 		options.setExperimentalOption("prefs", prefs);
 		driver = new ChromeDriver(options);
-		// driver= new FirefoxDriver();
-		// System.setProperty("webdriver.ie.driver",
-		// "./res/IEDriverServer_64.exe");
-		// driver=new InternetExplorerDriver();
 		driver.manage().window().maximize();
 	}
 
@@ -62,18 +56,7 @@ public class qqjf {
 		String homePageURL = xzcConfig.gethomePageURL();
 		String qqjfid = xzcConfig.getqqjfid();
 		String qqjfpwd = xzcConfig.getqqjfpwd();
-		// String xzcpdtList = xzcConfig.getpdtList();
-		// String xzcpdtname = xzcConfig.getpdt_Name();
 
-		// operate.openExe("./res/test2login.exe");
-		// driver.get(homePageURL);
-		// 运维环境使用
-		// operate.openExe("./res/ywlogin.exe");
-		// 测试环境使用
-		// operate.openExe("./res/test2login.exe");
-		// qqjf.refreshPage();
-		// qqjf.waitPageLoad();
-		// qqjf.click(By.id("TabProjectManagement-main"));
 		driver.get(qqjfhomePageURL);
 		qqjf.clickByText("登录");
 		qqjf.setValue(By.id("loginId"), qqjfid);
@@ -122,7 +105,7 @@ public class qqjf {
 		qqjf.click(By.xpath("//*[@id=\"checkboxName\"]/div/label[1]/span[1]"));
 		qqjf.click(By.id("addGuaranteeConfirmBtn"));
 		qqjf.clickByText("提 交");
-		Thread.sleep(7000); // 等待后台创建项目
+		Thread.sleep(8000); // 等待后台创建项目
 		qqjf.clickAByText("查看详情");
 		qqjf_no = qqjf
 				.getText(By
@@ -130,16 +113,14 @@ public class qqjf {
 		System.out.println(qqjf_no);
 		operate.openExe("./res/test2login.exe");
 		driver.get(homePageURL);
-		Thread.sleep(2000);
 		qqjf.switchtodefault();
+		Thread.sleep(2000);
 		// 进入项目列表页面
-		// qqjf.click(By.id("TabProjectManagement-main"));
 		qqjf.click(By.id("HomeTabLink"));
 		Thread.sleep(1000);
 		qqjf.click(By.id("ProjectManagement"));
 		qqjf.click(By.id("ubg_project"));
 		qqjf.switchToFrame("contentIFrame0");
-		// Thread.sleep(5000);
 		qqjf.setValue(By.id("crmGrid_findCriteria"), qqjf_no + Keys.ENTER);
 		Thread.sleep(1000);
 		qqjf.switchToFrame("contentIFrame0");
@@ -150,11 +131,8 @@ public class qqjf {
 		qqjf.setValue(By.id("ubg_custname_ledit"), "叶剑锋" + Keys.ENTER);
 		Thread.sleep(500);
 		qqjf.sendKeys(Key.ENTER);
-		// 选择是否综合授信
-		// qqjf.click(By.id("ubg_ifcomprehensivecredit"));
-		// qqjf.selectByText(By.id("ubg_ifcomprehensivecredit_i"), "否");
 		qqjf.click(By.id("ubg_quote"));
-		qqjf.setValue(By.id("ubg_quote_i"), "6" + Keys.ENTER); // 填写报价1
+		qqjf.setValue(By.id("ubg_quote_i"), "6" + Keys.ENTER);
 		qqjf.switchtodefault();
 		qqjf.click(By
 				.id("ubg_project|NoRelationship|Form|Mscrm.Form.ubg_project.Save"));
@@ -164,8 +142,6 @@ public class qqjf {
 		Thread.sleep(4000);
 		qqjf.switchToFrame("contentIFrame1");
 		// 填写用款计划
-		// qqjf.click(By.id("ubg_borrower"));
-		// qqjf.setValue(By.id("ubg_borrrower_i"), "叶剑锋");
 		qqjf.click(By.id("ubg_costmoney"));
 		qqjf.setValue(By.id("ubg_costmoney_i"), "10000");
 		qqjf.click(By.id("ubg_unit"));
@@ -214,48 +190,39 @@ public class qqjf {
 		Thread.sleep(2000);
 		qqjf.switchToFrame("contentIFrame1");
 		// 填写费用明细
-		// qqjf.moveToElement(By.id("feedetails_gridBar"));
-		// qqjf.click(By.id("feedetails_addImageButtonImage"));
-		// Thread.sleep(2000);
-		// qqjf.switchToFrame("NavBarGloablQuickCreate");
-		// qqjf.setValue(By.id("ubg_legalcontract_ledit"), "南通盈华" + Keys.ENTER);
-		// Thread.sleep(1000);
-		// qqjf.sendKeys(Key.ENTER);
-		// Thread.sleep(1000);
-		// qqjf.click(By.id("ubg_legalrole"));
-		// qqjf.selectByText(By.id("ubg_legalrole_i"), "服务");
-		// qqjf.click(By.id("ubg_paymentdetailtype"));
-		// qqjf.selectByText(By.id("ubg_paymentdetailtype_i"), "咨询服务费");
-		// qqjf.click(By.id("ubg_sum"));
-		// qqjf.setValue(By.id("ubg_sum_i"), "1600");
-		// qqjf.switchtodefault();
-		// qqjf.click(By
-		// .id("globalquickcreate_save_button_NavBarGloablQuickCreate"));
-		// qqjf.switchtodefault();
-		// Thread.sleep(2000);
-		// qqjf.click(By
-		// .id("ubg_projectplan|NoRelationship|Form|Mscrm.Form.ubg_projectplan.Save"));
-		Thread.sleep(2000);
-		System.out.println("用款创建成功：" + qqjf_no + "-1");
-		File file = new File("./test-output/test.txt");
-		FileOutputStream fos = new FileOutputStream(file, true);
-		String content = "项目创建成功：" + qqjf_no + " " + df.format(new Date())
-				+ "\n";
-		fos.write(content.getBytes());
-		fos.flush();
-		fos.close();
+//		qqjf.moveToElement(By.id("feedetails_gridBar"));
+//		qqjf.click(By.id("feedetails_addImageButtonImage"));
+//		Thread.sleep(2000);
+//		qqjf.switchToFrame("NavBarGloablQuickCreate");
+//		qqjf.setValue(By.id("ubg_legalcontract_ledit"), "南通盈华" + Keys.ENTER);
+//		Thread.sleep(1000);
+//		qqjf.sendKeys(Key.ENTER);
+//		Thread.sleep(1000);
+//		qqjf.click(By.id("ubg_legalrole"));
+//		qqjf.selectByText(By.id("ubg_legalrole_i"), "服务");
+//		qqjf.click(By.id("ubg_paymentdetailtype"));
+//		qqjf.selectByText(By.id("ubg_paymentdetailtype_i"), "咨询服务费");
+//		qqjf.click(By.id("ubg_sum"));
+//		qqjf.setValue(By.id("ubg_sum_i"), "1600");
+//		qqjf.switchtodefault();
+//		qqjf.click(By
+//				.id("globalquickcreate_save_button_NavBarGloablQuickCreate"));
+//		qqjf.switchtodefault();
+//		Thread.sleep(2000);
+//		qqjf.click(By
+//				.id("ubg_projectplan|NoRelationship|Form|Mscrm.Form.ubg_projectplan.Save"));
+//		Thread.sleep(2000);
+//		qqjf.record_prj(qqjf_no, "./test-output/test.txt");
 		qqjf.switchtodefault();
 		qqjf.click(By
 				.id("ubg_projectplan|NoRelationship|Form|Mscrm.Form.ubg_projectplan.SaveAndClose"));
 		Thread.sleep(2000);
 		qqjf.switchToFrame("contentIFrame1");
 		driver.switchTo().frame("IFRAME_fileinfomation");
-		// qqjf.click(By.xpath("/html/body/div[1]/div/table/tbody/tr[6]/td[6]/div/span/label"));
 		// //测试环境
 		qqjf.waitElementToBeClickable(By.id("filebody"));
 		List<WebElement> rows = driver.findElement(By.id("filebody"))
 				.findElements(By.tagName("tr"));
-		System.out.println(rows.size());
 		int i = 1;
 		for (; i < rows.size(); i++) {
 			String tempxpath = "//*[@id=\"filebody\"]/tr[" + i + "]/td[3]";
@@ -271,15 +238,7 @@ public class qqjf {
 		Thread.sleep(5000);
 		operate.openExe("./res/upload.exe");
 		Thread.sleep(2000);
-		// operate.openExe("./res/closetip.exe");
-		// Thread.sleep(5000);
-		// logger1.info("附件上传成功");
-		// qqjf.switchtodefault();
-		// qqjf.click(By.id("ubg_project|NoRelationship|Form|ubg.ubg_project.Button6.Button"));
-		// Thread.sleep(5000);
-		// operate.openExe("./res/closetip.exe");
-		driver.quit(); // 关闭浏览器
-		// operate.openExe("D:\\login.exe");
+//		driver.quit(); // 关闭浏览器
 	}
 
 }

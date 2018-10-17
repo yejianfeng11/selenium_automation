@@ -1,7 +1,13 @@
 package com.example;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Date;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.text.SimpleDateFormat;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -12,7 +18,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 
 public class operate {
 	public WebDriver driver = null;
@@ -142,6 +147,7 @@ public class operate {
 		}
 
 	}
+
 	/**
 	 * 判断元素对象是否存在
 	 * 
@@ -157,7 +163,7 @@ public class operate {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * 通过id输入文字
 	 * 
@@ -303,7 +309,7 @@ public class operate {
 	 * 
 	 * @param text
 	 */
-	public void clickDivByText(String text)throws Exception  {
+	public void clickDivByText(String text) throws Exception {
 		By by = By.xpath("//div[text()='" + text + "']");
 		waitElementToBeClickable(by);
 		WebElement element = driver.findElement(by);
@@ -314,7 +320,7 @@ public class operate {
 	 * 根据文本内容点击
 	 * 
 	 * @param text
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public void clickByText(String text) throws Exception {
 		By by = By.xpath("//*[text()='" + text + "']");
@@ -322,18 +328,19 @@ public class operate {
 		WebElement element = driver.findElement(by);
 		element.click();
 	}
+
 	/**
 	 * 根据文本内容点击超链接
 	 * 
 	 * @param text
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public void clickAByText(String text) throws Exception {
 		By by = By.xpath("//a[text()='" + text + "']");
 		waitElementToBeClickable(by);
 		WebElement element = driver.findElement(by);
 		element.click();
-//		log.info("Click on [" + by + "]");
+		// log.info("Click on [" + by + "]");
 	}
 
 	/**
@@ -409,15 +416,26 @@ public class operate {
 	 * 打开外部文件
 	 */
 	public static void openExe(String x) {
-//		Runtime rn = Runtime.getRuntime();
-//		Process p = null;
+		// Runtime rn = Runtime.getRuntime();
+		// Process p = null;
 		try {
 			Runtime.getRuntime().exec(x);
-//			p.waitFor();
+			// p.waitFor();
 			// Thread.sleep(5000);
 		} catch (Exception e) {
 			System.out.println("打开文件失败，请确认文件路径");
 		}
+	}
+
+	public  void record_prj(String prj, String directory)
+			throws IOException {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		File file = new File(directory);
+		FileOutputStream fos = new FileOutputStream(file, true);
+		String content = "项目创建成功：" + prj + " " + df.format(new Date()) + "\n";
+		fos.write(content.getBytes());
+		fos.flush();
+		fos.close();
 	}
 
 	/**
@@ -430,14 +448,16 @@ public class operate {
 			javascriptExecutor.executeScript(js);
 		}
 	}
+
 	/**
-     * 执行js代码
-     * 
-     * @param js : return_js
-     * 
-     * @return Object
-     */
-    public Object execJSR(String js){
-        return ((JavascriptExecutor)this.driver).executeScript(js);
-    }
+	 * 执行js代码
+	 * 
+	 * @param js
+	 *            : return_js
+	 * 
+	 * @return Object
+	 */
+	public Object execJSR(String js) {
+		return ((JavascriptExecutor) this.driver).executeScript(js);
+	}
 }
